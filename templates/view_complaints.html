@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - User Complaints</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7fb;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 30px 0;
+            color: #4a6b8c;
+            font-size: 2.5rem;
+            font-weight: 600;
+        }
+
+        .content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        table th, table td {
+            text-align: center;
+            padding: 15px 20px;
+        }
+
+        th {
+            background-color: #0277bd;
+            color: #fff;
+            font-size: 1.1rem;
+        }
+
+        td {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8f8f8;
+        }
+
+        tr:hover {
+            background-color: #e2f1fc;
+        }
+
+        a {
+            color: #0277bd;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: #01579b;
+            text-decoration: underline;
+        }
+
+        .btn-back {
+            display: inline-block;
+            padding: 12px 25px;
+            color: #fff;
+            background-color: #0277bd;
+            border-radius: 6px;
+            text-decoration: none;
+            text-align: center;
+            font-size: 1rem;
+            margin-top: 30px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-back:hover {
+            background-color: #01579b;
+        }
+
+        .no-data {
+            text-align: center;
+            color: #888;
+            font-style: italic;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+    {% include 'admin_header.html' %}<br><br><br>
+
+    <div class="content">
+        <h1>User Complaints</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Complaint ID</th>
+                    <th>Sender ID</th>
+                    <th>Complaints</th>
+                    <th>Reply</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if complaints %}
+                    {% for complaint in complaints %}
+                    <tr>
+                        <td>{{ complaint['complaint_id'] }}</td>
+                        <td>{{ complaint['sender_id'] }}</td>
+                        <td>{{ complaint['complaint'] }}</td>
+                        <td>
+                            {% if complaint['reply'] %}
+                                {{ complaint['reply'] }}
+                            {% else %}
+                                <em>No reply yet</em>
+                            {% endif %}
+                        </td>
+                        <td>{{ complaint['date'] }}</td>
+                        <td><a href="/reply_complaint?id={{complaint['complaint_id']}}">Reply</a></td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                <tr>
+                    <td colspan="6" class="no-data">No complaints submitted yet.</td>
+                </tr>
+                {% endif %}
+            </tbody>
+        </table>
+        <a href="/admin-dashboard" class="btn-back">Back to Dashboard</a>
+    </div>
+
+    {% include 'footer.html' %}
+</body>
+</html>

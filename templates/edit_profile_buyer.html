@@ -1,0 +1,49 @@
+{% include 'buyer-header.html' %}<br><br>
+
+<div style="padding: 50px; background-color: #f9f9f9; min-height: calc(100vh - 150px);">
+    <h1 style="text-align: center; font-family: Arial, sans-serif; color: #333; margin-bottom: 30px;">Update Profile</h1>
+    {% if data['up'] %}
+    <form action="" method="post" style="max-width: 600px; margin: 0 auto; background: white; padding: 20px 30px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+        <div style="margin-bottom: 20px;">
+            <label for="firstname" style="font-weight: bold; display: block; margin-bottom: 5px;">First Name</label>
+            <input type="text" id="firstname" name="firstname" value="{{ data['up'][0]['first_name'] }}" 
+                style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+        </div>
+        <div style="margin-bottom: 20px;">
+            <label for="lastname" style="font-weight: bold; display: block; margin-bottom: 5px;">Last Name</label>
+            <input type="text" id="lastname" name="lastname" value="{{ data['up'][0]['last_name'] }}" 
+                style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+        </div>
+        <div style="margin-bottom: 20px;">
+            <label for="email" style="font-weight: bold; display: block; margin-bottom: 5px;">Email</label>
+            <input type="email" id="email" name="email" value="{{ data['up'][0]['email'] }}" 
+                style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+        </div>
+        <div style="margin-bottom: 20px;">
+            <label for="phone" style="font-weight: bold; display: block; margin-bottom: 5px;">Phone</label>
+            <input type="text" id="phone" name="phone" pattern="[7-9]{1}[0-9]{9}" value="{{ data['up'][0]['phone'] }}" 
+                style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+        </div>
+        <div style="margin-bottom: 20px;">
+            <label for="place" style="font-weight: bold; display: block; margin-bottom: 5px;">Place</label>
+            <input type="text" id="place" name="place" value="{{ data['up'][0]['place'] }}" 
+                style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+        </div>
+        <div style="margin-bottom: 20px;">
+            <label for="housename" style="font-weight: bold; display: block; margin-bottom: 5px;">House Name</label>
+            <input type="text" id="housename" name="housename" value="{{ data['up'][0]['house_name'] }}" 
+                style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+        </div>
+        <div style="margin-bottom: 20px;">
+            <label for="pincode" style="font-weight: bold; display: block; margin-bottom: 5px;">Pincode</label>
+            <input type="text" id="pincode" name="pincode" value="{{ data['up'][0]['pincode'] }}" 
+                style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+        </div>
+        <div style="text-align: center; margin-top: 20px;">
+            <input type="submit" name="submit" value="Update" 
+                style="background-color: #007BFF; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;">
+        </div>
+    </form>
+    {% endif %}
+</div>
+{% include "footer.html" %}

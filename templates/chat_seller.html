@@ -1,0 +1,159 @@
+{% include 'seller-header.html' %}
+<br><br><br><br><br><br>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #eef2f7;
+        }
+        h3 {
+            text-align: center;
+            font-size: 1.8em;
+            color: #333;
+            margin: 20px 0;
+        }
+        .chat-container {
+            max-width: 900px;
+            margin: auto;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .chat-list h4 {
+            font-size: 1.3em;
+            color: #555;
+            margin-bottom: 15px;
+        }
+        .chat-list ul {
+            list-style: none;
+            padding: 0;
+        }
+        .chat-list li {
+            margin-bottom: 10px;
+        }
+        .chat-list li a {
+            text-decoration: none;
+            color: #007BFF;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+        .chat-list li a:hover {
+            text-decoration: underline;
+            color: #0056b3;
+        }
+        .chat-box {
+            padding: 15px;
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            max-height: 400px;
+            overflow-y: auto;
+            margin-top: 20px;
+        }
+        .message {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 15px;
+        }
+        .sent p {
+            align-self: flex-end;
+            max-width: 60%;
+            background-color: #d1f7d6;
+            padding: 10px;
+            border-radius: 12px;
+            color: #333;
+            word-wrap: break-word;
+        }
+        .received p {
+            align-self: flex-start;
+            max-width: 60%;
+            background-color: #f1f0f0;
+            padding: 10px;
+            border-radius: 12px;
+            color: #333;
+            word-wrap: break-word;
+        }
+        .message small {
+            font-size: 0.75em;
+            color: #999;
+            text-align: right;
+        }
+        form {
+            display: flex;
+            margin-top: 20px;
+        }
+        input[type="text"] {
+            flex-grow: 1;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            font-size: 1em;
+            margin-right: 10px;
+        }
+        button[type="submit"] {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 20px;
+            background-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        p {
+            text-align: center;
+            font-size: 1em;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <h4>Select a Buyer to Message:</h4>
+        <ul>
+            {% for buyer in buyers %}
+            <li>
+                <a href="{{ url_for('seller.chat_seller', buyer_id=buyer.buyer_id) }}">
+                    {{ buyer.first_name }} {{ buyer.last_name }}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+
+        <!-- Display Chat for the Selected Buyer -->
+        {% if chats %}
+        <div class="chat-box">
+            {% for chat in chats %}
+            <div class="message {{ 'sent' if chat.sender_id == sender_id else 'received' }}">
+                <p>
+                    <strong>{{ 'You' if chat.sender_id == sender_id else 'Buyer' }}:</strong>
+                    {{ chat.message }}
+                </p>
+                <small>{{ chat.date }} {{ chat.time }}</small>
+            </div>
+            {% endfor %}
+        </div>
+
+        <form method="POST">
+            <input type="text" name="message" placeholder="Type your message..." required>
+            <button type="submit">Send</button>
+        </form>
+        {% else %}
+        <p>Select a buyer to see the chat history.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
+{% include 'footer.html' %}

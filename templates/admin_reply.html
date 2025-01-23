@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reply to User Complaint</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7fb;
+            color: #333;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 30px;
+            background-color: #fff;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #0277bd;
+            margin-bottom: 20px;
+            font-size: 2.3rem;
+            font-weight: bold;
+        }
+
+        .form-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .form-table td {
+            padding: 12px;
+            font-size: 1rem;
+            color: #555;
+        }
+
+        .form-table input[type="submit"] {
+            background-color: #0277bd;
+            color: #fff;
+            padding: 12px 25px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .form-table input[type="submit"]:hover {
+            background-color: #01579b;
+        }
+
+        .textarea-container {
+            width: 100%;
+            min-height: 150px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-family: 'Segoe UI', sans-serif;
+            color: #333;
+        }
+
+        .textarea-container:focus {
+            outline: none;
+            border-color: #0277bd;
+        }
+
+        .info {
+            font-size: 1rem;
+            color: #888;
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .btn-back {
+            display: inline-block;
+            padding: 12px 25px;
+            color: #fff;
+            background-color: #0277bd;
+            border-radius: 6px;
+            text-decoration: none;
+            text-align: center;
+            font-size: 1rem;
+            margin-top: 30px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-back:hover {
+            background-color: #01579b;
+        }
+
+    </style>
+</head>
+<body>
+    {% include 'admin_header.html' %}<br><br><br>
+
+    <div class="container">
+        <h1>Reply to User Complaint</h1>
+        
+        <form action="" method="post">
+            <table class="form-table">
+                <tr>
+                    <td><strong>Your Reply</strong></td>
+                    <td><textarea class="textarea-container" name="reply_textarea" placeholder="Write your response here..."> </textarea></td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: center;">
+                        <input type="submit" name="submit" value="Send Reply">
+                    </td>
+                </tr>
+            </table>
+        </form>
+
+        <div class="info">
+            <p>If you need more assistance, please contact support at support@example.com.</p>
+        </div>
+        
+        <a href="/admin-dashboard" class="btn-back">Back to Dashboard</a>
+    </div>
+
+    {% include 'footer.html' %}
+</body>
+</html>

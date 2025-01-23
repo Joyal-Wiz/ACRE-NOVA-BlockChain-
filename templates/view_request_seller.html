@@ -1,0 +1,40 @@
+{% include 'seller-header.html' %}<br><br>
+
+<div class="view-requests-section" style="padding: 50px; background-color: #f9f9f9; min-height: calc(100vh - 150px);">
+    <h1 class="title" style="text-align: center; font-family: 'Poppins', sans-serif; color: #333; margin-bottom: 30px;">View Requests</h1>
+
+    <div class="requests-container" style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; max-width: 1200px; margin: 0 auto;">
+        {% for re in requests %}
+        <div class="request-card" style="background-color: white; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); width: 300px; padding: 20px; position: relative;">
+            <h2 style="font-size: 18px; font-family: 'Poppins', sans-serif; margin-bottom: 10px; color: #007BFF;">Request Details</h2>
+            <p style="margin: 5px 0; font-size: 14px; color: #333;"><strong>Available Date:</strong> {{ re['date'] }}</p>
+            <p style="margin: 5px 0; font-size: 14px; color: #333;"><strong>Available Time:</strong> {{ re['time'] }}</p>
+            <p style="margin: 5px 0; font-size: 14px; color: #333;"><strong>Submitted:</strong> {{ re['date_time'] }}</p>
+            <p style="margin: 5px 0; font-size: 14px; font-weight: bold; color: 
+                {% if re['status'] == 'pending' %}orange
+                {% elif re['status'] == 'reject' %}red
+                {% else %}green{% endif %};">
+                <strong>Status:</strong> {{ re['status'] | capitalize }}
+            </p>
+
+            {% if re['status'] == 'pending' %}
+            <div style="margin-top: 20px; display: flex; justify-content: space-between;">
+                <a href="?action=accept&id={{ re['request_id'] }}" 
+                   style="text-decoration: none; color: white; background-color: #28a745; padding: 10px 15px; border-radius: 4px; font-size: 14px; flex: 1; text-align: center; margin-right: 5px;">
+                    Approve
+                </a>
+                <a href="?action=reject&id={{ re['request_id'] }}" 
+                   style="text-decoration: none; color: white; background-color: #dc3545; padding: 10px 15px; border-radius: 4px; font-size: 14px; flex: 1; text-align: center;">
+                    Reject
+                </a>
+            </div>
+            {% else %}
+            <div style="margin-top: 20px; text-align: center;">
+                <span style="color: gray; font-size: 14px;">No Actions Available</span>
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% include 'footer.html' %}

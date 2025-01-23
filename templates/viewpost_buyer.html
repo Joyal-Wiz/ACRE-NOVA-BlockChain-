@@ -1,0 +1,30 @@
+{% include 'buyer-header.html' %}
+<br><br><br><br><br><br>
+<h1>Available Posts</h1>
+<div class="container">
+    <div class="row">
+        {% for post in viewposts %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src=" {{ post['image'] }}" class="card-img-top" alt="Post Image">
+                <div class="card-body">
+                    <h5 class="card-title">{{ post['post_title'] }}</h5>
+                    <p class="card-text">
+                        <strong>Seller ID:</strong> {{ post['seller_id'] }}<br>
+                        <strong>Description:</strong> {{ post['description'] }}<br>
+                        <strong>Amount:</strong> ₹{{ post['amount'] }}<br>
+                        <strong>Date:</strong> {{ post['date_time'] }}<br>
+                        <strong>Status:</strong> {{ post['status'] }}
+                    </p>
+                    <form action="/send_request" method="POST" class="mb-2">
+                        <input type="hidden" name="post_id" value="{{ post['post_id'] }}">
+                        <button type="submit" class="btn btn-primary btn-sm">Send Request</button>
+                    </form>
+                    <a href="/view_user_profile_chat?id={{ post['seller_id'] }}" class="btn btn-secondary btn-sm">profile of Seller</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% include 'footer.html' %}

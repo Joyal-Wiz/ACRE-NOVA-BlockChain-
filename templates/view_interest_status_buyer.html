@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interest Status</title>
+    <style>
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom right, #eef2f3, #d7e3fc);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            font-weight: 700;
+            margin-top: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 10px;
+        }
+
+        .interest-box {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .box {
+            width: 280px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .box:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .box h2 {
+            font-size: 18px;
+            color: #007BFF;
+            margin-bottom: 10px;
+        }
+
+        .box p {
+            margin: 5px 0;
+            color: #555;
+            font-size: 14px;
+        }
+
+        .status {
+            font-weight: bold;
+        }
+
+        .pending {
+            color: #ff9800;
+        }
+
+        .approved {
+            color: #4caf50;
+        }
+
+        .rejected {
+            color: #f44336;
+        }
+
+        .no-requests {
+            text-align: center;
+            font-size: 18px;
+            font-style: italic;
+            color: #666;
+            margin: 40px 0;
+        }
+
+        .btn-back {
+            display: inline-block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            color: #ffffff;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            transition: background-color 0.3s, transform 0.2s;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .btn-back:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    {% include 'buyer-header.html' %}<br><br><br>
+    <div class="container">
+        <h1>Sent Interest Status</h1>
+        {% if requests %}
+        <div class="interest-box">
+            {% for request in requests %}
+            <div class="box">
+                <h2>Request ID: {{ request['request_id'] }}</h2>
+                <p><strong>Post ID:</strong> {{ request['post_id'] }}</p>
+                <p><strong>Date:</strong> {{ request['date'] }}</p>
+                <p><strong>Status:</strong> 
+                    <span class="status 
+                        {% if request['status'] == 'pending' %}pending{% 
+                        elif request['status'] == 'approved' %}approved{% 
+                        else %}rejected{% endif %}">
+                        {{ request['status'] | capitalize }}
+                    </span>
+                </p>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="no-requests">
+            <p>No interest requests sent.</p>
+        </div>
+        {% endif %}
+        <a href="buyer-dashboard.html" class="btn-back">Back to Dashboard</a>
+    </div>
+    {% include 'footer.html' %}
+</body>
+</html>

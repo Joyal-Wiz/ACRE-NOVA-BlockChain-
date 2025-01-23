@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Sellers List</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7fb;
+            color: #333;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #0277bd;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            justify-items: center;
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 100%;
+            max-width: 350px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card-header {
+            background-color: #0277bd;
+            color: #fff;
+            padding: 15px;
+            font-size: 1.25rem;
+            font-weight: bold;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            width: 120px;
+            height: 120px;
+            line-height: 120px;
+            display: inline-block;
+            text-align: center;
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .card-header img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .card-body {
+            padding: 15px;
+        }
+
+        .card-body p {
+            font-size: 1rem;
+            margin: 10px 0;
+            color: #555;
+        }
+
+        .btn-back {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #0277bd;
+            color: #fff;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 1rem;
+            text-align: center;
+            margin-top: 30px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-back:hover {
+            background-color: #01579b;
+        }
+
+        .no-data {
+            font-size: 1rem;
+            color: #888;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    {% include 'admin_header.html' %}<br><br><br>      
+
+    <div class="container">
+        <h1>Sellers List</h1>
+        
+        <div class="cards-container">
+            {% if sellers %}
+                {% for seller in sellers %}
+                    <div class="card">
+
+                        <div class="card-body">
+                            <p><strong>First Name:</strong> {{ seller['first_name'] }}</p>
+                            <p><strong>Last Name:</strong> {{ seller['last_name'] }}</p>
+                            <p><strong>Email:</strong> {{ seller['email'] }}</p>
+                            <p><strong>Phone:</strong> {{ seller['phone'] }}</p>
+                            <p><strong>Location:</strong> {{ seller['place'] }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="no-data">No sellers found.</div>
+            {% endif %}
+        </div>
+
+        <a href="/admin-dashboard" class="btn-back">Back to Dashboard</a>
+    </div>
+
+    {% include 'footer.html' %}
+</body>
+</html>

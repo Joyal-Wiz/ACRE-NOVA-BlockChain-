@@ -1,0 +1,76 @@
+{% include 'seller-header.html' %}<br><br><br>
+<div class="container my-5">
+  <h2 class="text-center mb-4">Update your Profile</h2>
+
+  {% if data['up'] %}
+  <form action="" method="post" enctype="multipart/form-data" class="shadow p-4 rounded" style="background-color: #f8f9fa;">
+    <!-- Profile Image Section -->
+    <div class="mb-4 text-center">
+      <img id="profileImage" 
+           src="{{ data['up'][0]['dp'] if data['up'][0]['dp'] else 'default-image.jpg' }}" 
+           alt="Profile Image" 
+           class="rounded-circle" 
+           style="width: 150px; height: 150px; object-fit: cover; border: 2px solid #ddd;">
+      <div class="mt-3">
+        <label for="dp" class="form-label">Change Profile Image</label>
+        <input type="file" name="dp" id="dp" accept="image/*" class="form-control-file" onchange="previewImage(event)">
+      </div>
+    </div>
+
+    <!-- Input Fields -->
+    <div class="form-group mb-3">
+      <label for="firstname" class="form-label">First Name</label>
+      <input type="text" name="firstname" id="firstname" class="form-control" value="{{ data['up'][0]['first_name'] }}" required>
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="lastname" class="form-label">Last Name</label>
+      <input type="text" name="lastname" id="lastname" class="form-control" value="{{ data['up'][0]['last_name'] }}" required>
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" name="email" id="email" class="form-control" value="{{ data['up'][0]['email'] }}" required>
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="phone" class="form-label">Phone</label>
+      <input type="text" name="phone" id="phone" class="form-control" pattern="[7-9]{1}[0-9]{9}" value="{{ data['up'][0]['phone'] }}" required>
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="place" class="form-label">Place</label>
+      <input type="text" name="place" id="place" class="form-control" value="{{ data['up'][0]['place'] }}" required>
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="housename" class="form-label">House Name</label>
+      <input type="text" name="housename" id="housename" class="form-control" value="{{ data['up'][0]['house_name'] }}" required>
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="pincode" class="form-label">Pincode</label>
+      <input type="text" name="pincode" id="pincode" class="form-control" value="{{ data['up'][0]['pincode'] }}" required>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="text-center">
+      <input type="submit" name="submit" value="Update" class="btn btn-primary px-4">
+    </div>
+  </form>
+  {% endif %}
+</div>
+
+<script>
+  // Function to preview selected image
+  function previewImage(event) {
+    var reader = new FileReader();
+    reader.onload = function () {
+      var output = document.getElementById('profileImage');
+      output.src = reader.result; // Set the image source to the selected file
+    };
+    reader.readAsDataURL(event.target.files[0]);
+  }
+</script>
+
+{% include "footer.html" %}

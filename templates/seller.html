@@ -1,0 +1,45 @@
+{% include "public-header.html" %}<br><br><br><br><br><br>
+  <h1>welcome seller</h1>
+  <form action="" method="post">
+    <table>
+      <tr>
+        <td>First name</td>
+        <td><input type="text" name="firstname" required></td>
+      </tr>
+      <tr>
+        <td>Last name</td>
+        <td><input type="text" name="lastname" required></td>
+      </tr>
+      <tr>
+        <td>Email</td>
+        <td><input type="text" name="email" required></td>
+      </tr>
+      <tr>
+        <td>Phone</td>
+        <td><input type="text" name="phone" pattern="[7-9]{1}[0-9]{9}" required></td>
+      </tr>
+      <tr>
+        <td>Place</td>
+        <td><input type="text" name="place" required></td>
+      </tr>
+      <td>house name</td>
+      <td><input type="text" name="housename" required></td>
+    </tr>
+    <td>Pincode</td>
+      <td><input type="text" name="pincode" required></td>
+    </tr>
+      <tr>
+        <td>Username</td>
+        <td><input type="text" name="username" required></td>
+       </tr>
+        <tr>
+          <td>password</td>
+          <td><input type="password" name="password" required></td>
+        </tr>
+        <tr>
+      <tr>
+        <td><input type="submit" name="submit"></td>
+      </tr>
+    </table>
+  </form>
+  {% include "footer.html" %}

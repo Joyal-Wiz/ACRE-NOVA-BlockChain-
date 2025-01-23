@@ -1,0 +1,166 @@
+{% include 'buyer-header.html' %}
+<br><br><br><br><br><br>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .gradient-custom {
+            background: linear-gradient(to bottom right, #6a11cb, #2575fc);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .chat-container {
+            max-width: 1094px;
+            width: 108%;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgb(0 0 0 / 36%);
+            overflow: hidden;
+            margin-left: 4em;
+        }
+
+        .chat-header {
+            background: #2376f3a5;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        .chat-body {
+            padding: 15px;
+            overflow-y: auto;
+            max-height: 500px;
+            background: #f9f9f9;
+        }
+
+        .chat-body ul {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        .chat-message {
+            display: flex;
+            margin-bottom: 15px;
+            align-items: flex-start;
+        }
+
+        .chat-message img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .chat-message .message-content {
+            background: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 20em;
+        }
+
+        .chat-message.self {
+            flex-direction: row-reverse;
+        }
+
+        .chat-message.self .message-content {
+            background: #0738b4a4;
+            color: #fff;
+            width: 20em;
+        }
+
+        .chat-message.self img {
+            margin-left: 15px;
+            margin-right: 0;
+        }
+
+        .message-time {
+            font-size: 0.8rem;
+            color: #ffffff;
+            margin-top: 5px;
+        }
+
+        .chat-footer {
+            background: #fff;
+            padding: 15px;
+            border-top: 1px solid #eaeaea;
+        }
+
+        .chat-footer textarea {
+            width: calc(100% - 70px);
+            height: 50px;
+            resize: none;
+            border: 1px solid #eaeaea;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 1rem;
+        }
+
+        .chat-footer button {
+            width: 50px;
+            height: 50px;
+            background: #6a11cb;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            margin-left: 10px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .chat-footer button:hover {
+            background: #4c0da0;
+        }
+
+        .chat-footer button:active {
+            background: #3a087e;
+        }
+    </style>
+</head>
+<body class="gradient-custom">
+    <div class="chat-container">
+        <div class="chat-header">Chat with Seller</div>
+        <div class="chat-body">
+            <ul>
+                {% for chat in chats %}
+                <li class="chat-message {{ 'self' if chat.sender_id == sender_id else '' }}">
+                    {% if chat.sender_id != sender_id %}
+                    <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-8.webp" alt="Seller Avatar">
+                    {% else %}
+                    <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-1.webp" alt="Your Avatar">
+                    {% endif %}
+                    <div class="message-content">
+                        <p>{{ chat.message }}</p>
+                        <span class="message-time">{{ chat.date }} {{ chat.time }}</span>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="chat-footer">
+            <form method="POST">
+                <textarea name="message" placeholder="Type your message..."></textarea>
+                <button type="submit"><i class="fas fa-paper-plane"></i></button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+{% include 'footer.html' %}

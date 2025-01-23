@@ -1,0 +1,206 @@
+{% include 'buyer-header.html' %}
+<br><br><br><br><br><br><br><br>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buyer Profile</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ff 100%);
+            font-family: 'Arial', sans-serif;
+        }
+
+        .profile-header {
+            background: linear-gradient(135deg, #0033cc 0%, #0066ff 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border: 4px solid white;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .verified-badge {
+            background-color: #00cc44;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .social-links {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            margin-top: 2rem;
+        }
+
+        .social-links i {
+            width: 25px;
+            color: #0052cc;
+        }
+
+        .nav-pills .nav-link.active {
+            background-color: #0052cc;
+        }
+
+        .nav-pills .nav-link {
+            color: #0052cc;
+        }
+
+        .contact-info i {
+            width: 25px;
+            color: #0052cc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-5">
+        <!-- Profile Header -->
+        <div class="profile-header text-center text-md-start">
+            <div class="row align-items-center">
+                <div class="col-md-3 text-center">
+                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="{{ buyerProfile[0]['first_name'] }}" class="profile-img mb-3">
+                </div>
+                <div class="col-md-9">
+                    <div class="d-flex justify-content-between align-items-start flex-column flex-md-row">
+                        <div>
+                            <h1 class="mb-2">{{ buyerProfile[0]['first_name'] }} {{ buyerProfile[0]['last_name'] }}</h1>
+                            <span class="verified-badge mb-3">
+                                <i class="fas fa-check-circle"></i> Verified Buyer
+                            </span>
+                            <p class="lead mb-3">Property Seeker</p>
+                            <div class="contact-info">
+                                <p class="mb-2"><i class="fas fa-map-marker-alt"></i> {{ buyerProfile[0]['place'] if buyerProfile[0]['place'] else 'Location not specified' }}</p>
+                                <p class="mb-2"><i class="fas fa-phone"></i> {{ buyerProfile[0]['phone'] }}</p>
+                                <p class="mb-2"><i class="fas fa-envelope"></i> {{ buyerProfile[0]['email'] }}</p>
+                            </div>
+                        </div>
+                        <div class="mt-3 mt-md-0">
+                            <a href="/edit_profile_buyer?id={{ buyerProfile[0]['buyer_id'] }}" class="btn btn-light btn-lg mb-2">
+                                <i class="fas fa-edit me-2"></i>Edit Profile
+                            </a>
+                            <br>
+                            <a href="/change_password_buyer?id={{ buyerProfile[0]['login_id'] }}" class="btn btn-outline-light">
+                                <i class="fas fa-key me-2"></i>Change Password
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="row">
+            <div class="col-md-8">
+                <div class="bg-white p-4 rounded-3 shadow-sm">
+                    <ul class="nav nav-pills mb-4" id="profileTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#profile">Profile Details</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" data-bs-toggle="pill" data-bs-target="#preferences">Preferences</button>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <!-- Profile Tab -->
+                        <div class="tab-pane fade show active" id="profile">
+                            <div class="row mb-3">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Full Name</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {{ buyerProfile[0]['first_name'] }} {{ buyerProfile[0]['last_name'] }}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row mb-3">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Email</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {{ buyerProfile[0]['email'] }}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row mb-3">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Phone</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {{ buyerProfile[0]['phone'] }}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row mb-3">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Address</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {{ buyerProfile[0]['place'] if buyerProfile[0]['place'] else 'Not provided' }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Preferences Tab -->
+                        <div class="tab-pane fade" id="preferences">
+                            <h5 class="mb-3">Property Preferences</h5>
+                            <p class="text-muted">Set your preferences to receive personalized property recommendations.</p>
+                            <!-- Add preference content here if needed -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <!-- Social Links Card -->
+                <div class="social-links">
+                    <h5 class="mb-4">Social Links</h5>
+                    <div class="mb-3">
+                        <i class="fab fa-globe"></i>
+                        <span class="text-secondary">{{ buyerProfile[0]['website'] if buyerProfile[0]['website'] else 'Not provided' }}</span>
+                    </div>
+                    <div class="mb-3">
+                        <i class="fab fa-github"></i>
+                        <span class="text-secondary">{{ buyerProfile[0]['github'] if buyerProfile[0]['github'] else 'Not provided' }}</span>
+                    </div>
+                    <div class="mb-3">
+                        <i class="fab fa-twitter"></i>
+                        <span class="text-secondary">{{ buyerProfile[0]['twitter'] if buyerProfile[0]['twitter'] else 'Not provided' }}</span>
+                    </div>
+                    <div class="mb-3">
+                        <i class="fab fa-instagram"></i>
+                        <span class="text-secondary">{{ buyerProfile[0]['instagram'] if buyerProfile[0]['instagram'] else 'Not provided' }}</span>
+                    </div>
+                    <div class="mb-3">
+                        <i class="fab fa-facebook"></i>
+                        <span class="text-secondary">{{ buyerProfile[0]['facebook'] if buyerProfile[0]['facebook'] else 'Not provided' }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+{% include 'footer.html' %}

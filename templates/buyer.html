@@ -1,0 +1,59 @@
+{% include "public-header.html" %}<br><br><br><br>
+
+<head>
+  <meta charset="utf-8">
+  <title>RegistrationForm_v1 by Colorlib</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- MATERIAL DESIGN ICONIC FONT -->
+  <link rel="stylesheet" href="fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
+  
+  <!-- STYLE CSS -->
+  <link rel="stylesheet" href="/static/assets/css/buyer.css">
+</head>
+
+<body>
+
+<div class="wrapper" style="background-image: url('/static/assets/img/bg-registration-form-1.jpg');">
+  <div class="inner">
+    <div class="image-holder">
+      <img src="/static/assets/img/registration-form-1.jpg" alt="">
+    </div>
+    <form action="" method="POST">
+      <h3>Registration Form</h3>
+      <div class="form-group">
+        <input type="text" name="firstname" placeholder="First Name" class="form-control" required>
+        <input type="text" name="lastname" placeholder="Last Name" class="form-control" required>
+      </div>
+      <div class="form-wrapper">
+        <input type="text" name="place" placeholder="Place" class="form-control" required>
+        <input type="text" name="pincode" placeholder="Pin code" class="form-control" required>
+      </div>
+      <div class="form-wrapper">
+        <input type="text" name="phone" placeholder="Phone" class="form-control" required>
+        <i class="zmdi zmdi-account"></i>
+      </div>
+      <div class="form-wrapper">
+        <input type="email" name="email" placeholder="Email Address" class="form-control" required>
+        <i class="zmdi zmdi-email"></i>
+      </div>
+      <div class="form-wrapper">
+        <input type="text" name="housename" placeholder="House Name" class="form-control" required>
+      </div>
+      <div class="form-wrapper">
+        <input type="password" name="username" placeholder="Username" class="form-control" required>
+        <i class="zmdi zmdi-lock"></i>
+      </div>
+      <div class="form-wrapper">
+        <input type="password" name="password" placeholder="Password" class="form-control" required>
+        <i class="zmdi zmdi-lock"></i>
+      </div>
+      <button type="submit" name="submit">Register
+        <i class="zmdi zmdi-arrow-right"></i>
+      </button>
+    </form>
+  </div>
+</div>
+
+{% include "footer.html" %}
+</body>

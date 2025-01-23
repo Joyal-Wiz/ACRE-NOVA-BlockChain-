@@ -1,0 +1,59 @@
+{% include 'seller-header.html' %}<br><br><br>
+
+
+<link rel="stylesheet" href="/static/assets/css/viewplotseller.css">
+
+<div class="main-container">
+    <div class="text-box">
+        <p>Discover Your Dream Property</p>
+        <i>"Explore a wide range of sellable properties and find your perfect investment opportunity in the real estate market. Start your journey with us today"</i>
+    </div>
+</div>
+
+<div class="boxbg">
+    <div class="boxtop">
+        <h1>Featured Properties</h1>
+
+
+    </div>
+    <br>
+
+    <div class="row" style="margin: 0 auto; width: 90%; justify-content: center; display: flex; flex-wrap: wrap; gap: 20px;">
+        {% for i in data['view'] %}
+        <div class="card" style="width: 20rem; border: none; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
+
+
+            <img src="{{ i.get('image', 'default-image.jpg') }}" class="card-img-top" alt="{{ i.get('post_title', 'No Image') }}" style="height: 180px; object-fit: cover;">
+
+            
+            <div class="card-body" style="padding: 15px; text-align: center;">
+                <h5 class="card-title" style="font-size: 1.5rem; font-weight: bold; color: #084c61;">
+                    {{ i.get('post_title', 'No Title') }}
+                </h5>
+                <p class="card-text" style="color: #6c757d; margin-bottom: 5px;">
+                    {{ i.get('description', 'No Description Available') }}
+                </p>
+                <p style="font-size: 1rem; font-weight: bold; color: #495057;">
+                    <strong>Amount:</strong> ${{ i.get('amount', 'N/A') }}
+                </p>
+                <div style="display: flex; justify-content: center; gap: 10px; margin-top: 15px;">
+                    <a href="/edit_post_seller?id={{ i.get('post_id', 0) }}" 
+                       class="btn btn-primary" 
+                       style="padding: 10px 15px; text-decoration: none; border-radius: 5px;">
+                       Edit
+                    </a>
+                    <a href="/delete_post_seller?id={{ i.get('post_id', 0) }}" 
+                       class="btn btn-danger" 
+                       style="padding: 10px 15px; text-decoration: none; border-radius: 5px;">
+                       Delete
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+
+
+{% include 'footer.html' %}

@@ -1,0 +1,107 @@
+{% include 'seller-header.html' %}
+<br><br><br>
+<style>
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #f4f4f9, #e8eafc);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  }
+  form {
+    background: #ffffff;
+    padding: 30px 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 500px;
+    animation: fadeIn 1s ease;
+    margin: 20px 0;
+  }
+  form table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  table td {
+    padding: 12px 0;
+    vertical-align: middle;
+  }
+  td:first-child {
+    text-align: left;
+    font-weight: bold;
+    color: #333;
+    padding-right: 15px;
+  }
+  input[type="text"], input[type="submit"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.3s ease;
+    background: #f9f9f9;
+  }
+  input[type="text"]:focus {
+    border-color: #007bff;
+    box-shadow: 0 4px 6px rgba(0, 123, 255, 0.2);
+  }
+  input[type="submit"] {
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+  }
+  input[type="submit"]:hover {
+    background: linear-gradient(135deg, #0056b3, #003f8a);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+
+<br><br><br>
+
+{% if data['up'] %}
+<form action="" method="post">
+  <table>
+    <tr>
+      <td>Post Title</td>
+      <td><input type="text" name="post_title" value="{{ data['up'][0]['post_title'] }}" placeholder="Enter Post Title"></td>
+    </tr>
+    <tr>
+      <td>Description</td>
+      <td><input type="text" name="description" value="{{ data['up'][0]['description'] }}" placeholder="Enter Description"></td>
+    </tr>
+    <tr>
+      <td>Amount</td>
+      <td><input type="text" name="amount" value="{{ data['up'][0]['amount'] }}" placeholder="Enter Amount"></td>
+    </tr>
+    <tr>
+      <td colspan="2" style="text-align: center;">
+        <input type="submit" name="submit" value="Update">
+      </td>
+    </tr>
+  </table>
+</form>
+{% endif %}
+
+{% include "footer.html" %}
