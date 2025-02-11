@@ -6,7 +6,7 @@
         {% for post in viewposts %}
         <div class="col-md-4 mb-4">
             <div class="card">
-                <img src=" {{ post['image'] }}" class="card-img-top" alt="Post Image">
+                <img src="{{ post.get('image', 'default-image.jpg') }}" class="card-img-top" alt="{{ post.get('post_title', 'No Image') }}" style="height: 180px; object-fit: cover;">
                 <div class="card-body">
                     <h5 class="card-title">{{ post['post_title'] }}</h5>
                     <p class="card-text">

@@ -144,9 +144,8 @@ def view_request_seller():
 
 
 
-from datetime import datetime
-from flask import session, request, render_template, redirect
 
+from datetime import datetime
 @seller.route('/chat_seller', methods=['GET', 'POST'])
 def chat_seller():
     # Fetch seller_id from the session
@@ -154,20 +153,17 @@ def chat_seller():
     if not seller_id:
         return "<script>alert('Seller not logged in'); window.location='/seller_home'</script>"
 
-    # Fetch the list of buyers who have interacted with the seller
+    # Fetch the list of buyers who have chatted with the seller
     buyers_query = f"""
         SELECT DISTINCT
-            b.buyer_id,
-            b.first_name,
-            b.last_name
-        FROM buyer b
-        JOIN chat c ON b.buyer_id = CASE
-            WHEN c.sender_id != {seller_id} THEN c.sender_id
-            ELSE c.receiver_id
-        END
-        WHERE c.sender_id = {seller_id} OR c.receiver_id = {seller_id}
+            CASE
+                WHEN sender_id != {seller_id} THEN sender_id
+                ELSE receiver_id
+            END AS buyer_id
+        FROM chat
+        WHERE sender_id = {seller_id} OR receiver_id = {seller_id}
     """
-    buyers = select(buyers_query)
+    buyers = select(buyers_query)  # Use the unmodified `select` function
 
     # Fetch the selected buyer_id from the request arguments
     selected_buyer_id = request.args.get('buyer_id')
@@ -187,7 +183,7 @@ def chat_seller():
                OR (sender_id = {selected_buyer_id} AND receiver_id = {seller_id})
             ORDER BY date, time ASC
         """
-        chats = select(chats_query)
+        chats = select(chats_query)  # Use the unmodified `select` function
 
     if request.method == 'POST':
         # Handle sending a new message
@@ -206,7 +202,7 @@ def chat_seller():
                     AND message = '{message}' AND date = '{date}' AND time = '{time}'
                 )
             """
-            insert(insert_query)
+            insert(insert_query)  # Use the unmodified `insert` function
         return redirect(f"/chat_seller?buyer_id={selected_buyer_id}")
 
     # Render the chat template
